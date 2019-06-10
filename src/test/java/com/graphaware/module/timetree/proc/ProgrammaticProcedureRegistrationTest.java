@@ -20,6 +20,7 @@ import com.graphaware.module.timetree.module.TimeTreeConfiguration;
 import com.graphaware.module.timetree.module.TimeTreeModule;
 import com.graphaware.runtime.GraphAwareRuntime;
 import com.graphaware.runtime.GraphAwareRuntimeFactory;
+import com.graphaware.runtime.RuntimeRegistry;
 import org.junit.Test;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.kernel.impl.proc.Procedures;
@@ -39,5 +40,7 @@ public class ProgrammaticProcedureRegistrationTest {
         ((GraphDatabaseAPI) database).getDependencyResolver().resolveDependency(Procedures.class).registerProcedure(TimeTreeProcedure.class);
 
         database.execute("CALL ga.timetree.now({})");
+
+        RuntimeRegistry.clear();
     }
 }
